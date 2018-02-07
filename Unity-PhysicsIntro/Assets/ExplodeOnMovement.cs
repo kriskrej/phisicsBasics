@@ -13,8 +13,10 @@ public class ExplodeOnMovement : MonoBehaviour {
     }
 
     void Update() {
-        if (HasMoved())
-            Explode();
+        if (HasMoved()) {
+            enabled = false;
+            Invoke("Explode", 0.3f);
+        }
     }
 
     bool HasMoved() {
@@ -22,7 +24,6 @@ public class ExplodeOnMovement : MonoBehaviour {
     }
 
     void Explode() {
-        enabled = false;
         ThrowRigidbodiesAway();
         InstantiateParticles();
     }
