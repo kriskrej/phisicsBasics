@@ -37,6 +37,9 @@ public class ExplodeOnMovement : MonoBehaviour {
         var hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (var hitCollider in hitColliders) {
             var rb = hitCollider.GetComponent<Rigidbody>();
+			if (rb == null)
+				if(hitCollider.transform.parent != null)
+					rb = hitCollider.transform.parent.GetComponent<Rigidbody> ();
             if(rb == null) continue;
             rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
         }
